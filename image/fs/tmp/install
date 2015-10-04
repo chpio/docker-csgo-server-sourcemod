@@ -22,7 +22,8 @@ wget \
 # check sha1 sums
 sha1sum -c /tmp/sha1sums
 
-tar -xzf metamod.tar.gz -f sourcemod.tar.gz -C /opt/csgo
+tar -xzf metamod.tar.gz -C /opt/csgo
+tar -xzf sourcemod.tar.gz -C /opt/csgo
 
 # clean up
 apt-get purge -y $DEPS_BUILD
