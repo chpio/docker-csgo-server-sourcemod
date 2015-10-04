@@ -1,0 +1,6 @@
+#!/bin/sh
+
+exec docker build \
+	--tag chpio/csgo-server-sourcemod \
+	$@ \
+	"$(dirname "$(readlink -f $0)")/image"
