@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+
+# deps
+DEPS=""
+DEPS_BUILD="wget ca-certificates"
+
+# install deps
+apt-get update
+apt-get install -y $DEPS $DEPS_BUILD
+
+# download metamod & sourcemod
+wget \
+	"http://sourcemod.gameconnect.net/files/mmsource-1.10.6-linux.tar.gz" \
+	-O /tmp/metamod.tar.gz
+
+wget \
+	"https://www.sourcemod.net/smdrop/1.7/sourcemod-1.7.3-git5258-linux.tar.gz" \
+	-O /tmp/sourcemod.tar.gz
+
+# check sha1 sums
+sha1sum -c /tmp/sha1sums
+
+tar -xzf /tmp/metamod.tar.gz -f /tmp/sourcemod.tar.gz -C /opt/csgo
+
+# clean up
+apt-get purge -y $DEPS_BUILD
+apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
